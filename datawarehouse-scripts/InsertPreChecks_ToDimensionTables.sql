@@ -236,16 +236,4 @@ join DimOutcomeType as dimOutcomeType on dimOutcomeType.Outcome_type_ID = stage.
 join DimCrimeType as dimCrimeType on dimCrimeType.Crime_type_ID = stage.Crime_type_ID
 GROUP BY dimBorough.Borough_ID, dimSubBorough.Sub_borough_ID, dimLocation.Location_ID,dimTime.Time_ID,
        dimPoliceForce.Police_force_ID, dimOutcomeType.Outcome_type_ID, dimCrimeType.Crime_type_ID
-
-select DISTINCT dimBorough.Borough_ID, dimTime.Time_ID,       
-       COUNT(*) as  Total_crime_count
-from StageLondonCrime as stage
-join DimBorough as dimBorough on dimBorough.Borough_ID = stage.Borough_ID  
-join DimSubBorough as dimSubBorough on dimSubBorough.Sub_borough_ID = stage.Sub_borough_ID  
-join DimLocation as dimLocation on dimLocation.Location_ID = stage.Location_ID
-join DimTime as dimTime on dimTime.Time_ID = stage.Time_ID
-join DimPoliceForce as dimPoliceForce on dimPoliceForce.Police_force_ID = stage.Police_force_ID
-join DimOutcomeType as dimOutcomeType on dimOutcomeType.Outcome_type_ID = stage.Outcome_type_ID
-join DimCrimeType as dimCrimeType on dimCrimeType.Crime_type_ID = stage.Crime_type_ID
-GROUP BY dimBorough.Borough_ID, dimTime.Time_ID
-ORDER BY Total_crime_count
+ORDER BY dimBorough.Borough_ID

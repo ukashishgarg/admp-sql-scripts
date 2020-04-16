@@ -194,7 +194,7 @@ GO
 /****** Object:  Table [dbo].[DimSeason]   ******/
 CREATE TABLE [dbo].[DimSeason](
 	[Season_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Borough_name] [nvarchar](500) NULL,
+	[Season_name] [nvarchar](500) NULL,
  CONSTRAINT [PK_DimSeason] PRIMARY KEY CLUSTERED 
 (
 	[Season_ID] ASC
