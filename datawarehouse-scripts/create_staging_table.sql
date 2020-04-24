@@ -153,10 +153,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+
 CREATE TABLE [dbo].[DimTime](
-	[Time_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Crime_month] [int] NULL,
-	[Crime_year] [int] NULL,
+	[Time_ID] [int] NOT NULL,
+	[Month] [int] NULL,
+	[Year] [int] NULL,
 	[Month_name] [varchar](20) NULL,
 	[Season_name] [varchar](20) NULL,
  CONSTRAINT [PK_DimTime] PRIMARY KEY CLUSTERED 
