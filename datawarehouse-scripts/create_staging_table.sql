@@ -14,9 +14,10 @@ GO
 CREATE TABLE [dbo].[StageLondonCrime](
 	[Staging_ID] [int] NOT NULL IDENTITY(1,1), -- using the IDENTITY property for an automatically incrementing identification number
 	[Crime_ID] [nvarchar](300) NULL,
+	[Crime_month] [int] NULL,
 	[Police_force] [nvarchar](200) NULL,
-	[Latitude] [float] NULL,
 	[Longitude] [float] NULL,
+	[Latitude] [float] NULL,
 	[Location] [nvarchar](200) NULL,
 	[LSOA_code] [nvarchar](400) NULL,
 	[LSOA_name] [nvarchar](200) NULL,
@@ -24,11 +25,7 @@ CREATE TABLE [dbo].[StageLondonCrime](
 	[Crime_status] [nvarchar](20) NULL,
 	[Borough_name] [nvarchar](500) NULL,
 	[Crime_year] [int] NULL,
-	[Crime_month] [int] NULL,
 	[Crime_outcome] [nvarchar](500) NULL,	
-	[Outcome_year] [int] NULL,
-	[Outcome_month] [int] NULL,
-	[Outcome_timeframe] [int] NULL,
 	-- Declare variables to store the keys of different dimensions
 	[Location_ID] [int] NULL,
 	[Borough_ID] [int] NULL,
