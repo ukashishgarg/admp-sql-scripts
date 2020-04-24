@@ -34,7 +34,6 @@ CREATE TABLE [dbo].[StageLondonCrime](
 	[Crime_type_ID] [int] NULL,
 	[Outcome_type_ID] [int] NULL,
 	[Time_ID] [int] NULL,
-	[Outcome_timeframe_ID] [int] NULL,
 	[Crime_status_ID] [int] NULL,
 	CONSTRAINT [PK_StageLondonCrime] PRIMARY KEY CLUSTERED 
 (
