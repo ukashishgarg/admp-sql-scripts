@@ -13,27 +13,32 @@ GO
 
 CREATE TABLE [dbo].[StageLondonCrime](
 	[Staging_ID] [int] NOT NULL IDENTITY(1,1), -- using the IDENTITY property for an automatically incrementing identification number
-	[Crime_ID] [int] NULL,
-	[Crime_hashcode] [nvarchar](300) NULL,
-	[Month] [int] NULL,
-	[Year] [int] NULL,
-	[Falls_within] [nvarchar](200) NULL,
-	[Longitude] [float] NULL,
+	[Crime_ID] [nvarchar](300) NULL,
+	[Police_force] [nvarchar](200) NULL,
 	[Latitude] [float] NULL,
+	[Longitude] [float] NULL,
 	[Location] [nvarchar](200) NULL,
 	[LSOA_code] [nvarchar](400) NULL,
 	[LSOA_name] [nvarchar](200) NULL,
 	[Crime_type] [nvarchar](500) NULL,
+	[Crime_status] [nvarchar](20) NULL,
 	[Borough_name] [nvarchar](500) NULL,
-	[Latest_Outcome_type] [nvarchar](500) NULL,	
+	[Crime_year] [int] NULL,
+	[Crime_month] [int] NULL,
+	[Crime_outcome] [nvarchar](500) NULL,	
+	[Outcome_year] [int] NULL,
+	[Outcome_month] [int] NULL,
+	[Outcome_timeframe] [int] NULL,
+	-- Declare variables to store the keys of different dimensions
 	[Location_ID] [int] NULL,
 	[Borough_ID] [int] NULL,
 	[Sub_borough_ID] [int] NULL,
 	[Police_force_ID] [int] NULL,
-	[Season_ID] [int] NULL,
 	[Crime_type_ID] [int] NULL,
 	[Outcome_type_ID] [int] NULL,
 	[Time_ID] [int] NULL,
+	[Outcome_timeframe_ID] [int] NULL,
+	[Crime_status_ID] [int] NULL,
 	CONSTRAINT [PK_StageLondonCrime] PRIMARY KEY CLUSTERED 
 (
 	[Staging_ID] ASC
@@ -131,6 +136,16 @@ CREATE TABLE [dbo].[DimPoliceForce](
 ) ON [PRIMARY]
 GO
 
+CREATE TABLE [dbo].[DimCourtTimeframe](
+	[Court_timeframe_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Court_timeframe] [nvarchar](200) NULL,
+ CONSTRAINT [PK_DimCourtTimeframe] PRIMARY KEY CLUSTERED 
+(
+	[Court_timeframe_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 /* ****************************************** Time Dimension table creation************************************ */
 USE [CrimeInLondon_DataWareHouse]
 GO
@@ -144,8 +159,8 @@ GO
 
 CREATE TABLE [dbo].[DimTime](
 	[Time_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Month] [int] NULL,
-	[Year] [int] NULL,
+	[Crime_month] [int] NULL,
+	[Crime_year] [int] NULL,
 	[Month_name] [varchar](20) NULL,
 	[Season_name] [varchar](20) NULL,
  CONSTRAINT [PK_DimTime] PRIMARY KEY CLUSTERED 
@@ -191,13 +206,13 @@ CREATE TABLE [dbo].[DimBorough](
 ) ON [PRIMARY]
 GO
 
-/****** Object:  Table [dbo].[DimSeason]   ******/
-CREATE TABLE [dbo].[DimSeason](
-	[Season_ID] [int] IDENTITY(1,1) NOT NULL,
-	[Season_name] [nvarchar](500) NULL,
- CONSTRAINT [PK_DimSeason] PRIMARY KEY CLUSTERED 
+/****** Object:  Table [dbo].[DimCrimeStatus]   ******/
+CREATE TABLE [dbo].[DimCrimeStatus](
+	[Crime_status_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Crime_status] [nvarchar](20) NULL,
+ CONSTRAINT [PK_DimCrimeStatus] PRIMARY KEY CLUSTERED 
 (
-	[Season_ID] ASC
+	[Crime_status_ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO

@@ -1,6 +1,6 @@
 -- qryQuestion1
 -- What was the total number of street crimes per borough per subborough of London region in each month between Jan 2017 to Dec 2019?
-select dimTime.Year, dimTime.Month, dimTime.Month_name, dimBorough.Borough_name, dimSubBorough.LSOA_code,  SUM(fact.Total_crime_count) as TotalCrimes
+select dimTime.Crime_year, dimTime.Crime_month, dimTime.Month_name, dimBorough.Borough_name, dimSubBorough.LSOA_code,  SUM(fact.Total_crime_count) as TotalCrimes
 from FactLondonCrime as fact
 join DimTime as dimTime on dimTime.Time_ID =  fact.Time_ID
 join DimBorough as dimBorough on dimBorough.Borough_ID = fact.Borough_ID
