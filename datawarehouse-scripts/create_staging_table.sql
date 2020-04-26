@@ -181,6 +181,7 @@ GO
 USE [CrimeInLondon_DataWareHouse]
 GO
 
+drop table DimSubBorough
 CREATE TABLE [dbo].[DimSubBorough](
 	[Sub_borough_ID] [int] IDENTITY(1,1) NOT NULL,
 	[LSOA_code] [nvarchar](400) NULL,
@@ -193,6 +194,7 @@ CREATE TABLE [dbo].[DimSubBorough](
 GO
 
 /****** Object:  Table [dbo].[DimBorough]   ******/
+drop table DimBorough
 CREATE TABLE [dbo].[DimBorough](
 	[Borough_ID] [int] IDENTITY(1,1) NOT NULL,
 	[Borough_name] [nvarchar](500) NULL,

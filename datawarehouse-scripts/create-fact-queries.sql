@@ -1,14 +1,14 @@
 -- ******************** SQL QUERIES TO ANSWER 5 BUSINESS QUESTIONS ************************
 
 -- Question 01: What was the total count of crimes in each month between 2017 to 2019 per borough, sub-borough and location?
-select dimTime.Year, dimTime.Month, dimBorough.Borough_name, dimSubBorough.Sub_borough_name, dimLocation.Location,
+select dimTime.Year, dimTime.Month, dimBorough.Borough_name, dimSubBorough.LSOA_name, dimLocation.Location,
        sum(factCrimeLondon1.Crime_count) AS SumOfValue 
 from FactLondonCrime01 as factCrimeLondon1
 join DimTime as dimTime on dimTime.Time_ID = factCrimeLondon1.Time_ID
 join DimBorough as dimBorough on dimBorough.Borough_ID = factCrimeLondon1.Borough_ID  
 join DimSubBorough as dimSubBorough on dimSubBorough.Sub_borough_ID = factCrimeLondon1.Sub_borough_ID  
 join DimLocation as dimLocation on dimLocation.Location_ID = factCrimeLondon1.Location_ID
-GROUP BY dimTime.Year, dimTime.Month, dimBorough.Borough_name, dimSubBorough.Sub_borough_name, dimLocation.Location
+GROUP BY dimTime.Year, dimTime.Month, dimBorough.Borough_name, dimSubBorough.LSOA_name, dimLocation.Location
 ORDER BY dimTime.Year, dimTime.Month
 
 -- Question 02a: What were the counts of different crime outcomes for the crimes committed in the month of January 2017? 
@@ -47,7 +47,7 @@ GROUP BY dimCrimeType.Crime_type
 ORDER BY SumOfValue DESC
 
 -- Question 05: Which borough and location had a maximum crimes during October month from 2017 to 2019 for crime type 'Violence and sexual offences'?
-select dimBorough.Borough_name, dimLocation.Location, sum(factCrimeLondon5.Crime_count) AS SumOfValue 
+select dimBorough.Borough_name, dimLocation.Location, sum(factCrimeLondon5.Crime_count) AS CrimeCount
 from FactLondonCrime05 as factCrimeLondon5
 join DimTime as dimTime on dimTime.Time_ID = factCrimeLondon5.Time_ID
 join DimBorough as dimBorough on dimBorough.Borough_ID = factCrimeLondon5.Borough_ID  
@@ -55,7 +55,7 @@ join DimLocation as dimLocation on dimLocation.Location_ID = factCrimeLondon5.Lo
 join DimCrimeType as dimCrimeType on dimCrimeType.Crime_type_ID = factCrimeLondon5.Crime_type_ID
 where dimTime.Month=10 and dimCrimeType.Crime_type_ID = 26
 GROUP BY dimBorough.Borough_name,  dimLocation.Location
-ORDER BY SumOfValue DESC
+ORDER BY CrimeCount DESC
 
 
 
